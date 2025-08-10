@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — HAZEN DESIGN</title>
+  <style>
+    /* ===== Reset ringan ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height: 100%; }
+    body{
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(135deg,#0f172a 0%, #071024 60%);
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      line-height: 1.4;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ===== Kontainer utama ===== */
+    .card {
+      width: min(980px, 95vw);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 0;
+    }
+
+    /* ===== Sidebar kiri ===== */
+    .profile {
+      padding: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), transparent),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0 2px, transparent 2px 6px);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      background: linear-gradient(135deg,#8b5cf6,#06b6d4);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:42px;
+      color:white;
+      box-shadow: 0 6px 18px rgba(3,7,18,0.6);
+      margin-bottom:16px;
+    }
+
+    h1.name {
+      font-size:20px;
+      margin-bottom:6px;
+      letter-spacing:0.3px;
+    }
+    p.role {
+      font-size:13px;
+      opacity:0.8;
+      margin-bottom:16px;
+    }
+
+    .socials {
+      display:flex;
+      gap:8px;
+      margin-bottom: 18px;
+    }
+    .chip {
+      background: rgba(255,255,255,0.03);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    /* skill bars */
+    .skills { width:100%; margin-top:8px; }
+    .skill {
+      margin:12px 0;
+    }
+    .skill .label { font-size:12px; opacity:0.9; margin-bottom:6px; display:flex; justify-content:space-between; }
+    .bar {
+      height:10px;
+      background: rgba(255,255,255,0.04);
+      border-radius:999px;
+      overflow:hidden;
+    }
+    .bar > i{
+      display:block;
+      height:100%;
+      background: linear-gradient(90deg,#34d399,#06b6d4);
+      border-radius:999px;
+      width:60%; /* ubah presentase skill di sini */
+      transition:width .8s ease;
+      box-shadow: 0 4px 12px rgba(6,182,212,0.12);
+    }
+
+    /* ===== Konten kanan ===== */
+    .content {
+      padding: 28px 32px;
+    }
+
+    .headline {
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+    }
+    .headline h2 {
+      font-size:18px;
+      margin-bottom:8px;
+    }
+    .headline p {
+      font-size:13px;
+      color: #cfe9ff;
+      opacity:0.9;
+    }
+
+    .projects {
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+      gap:14px;
+    }
+
+    .project {
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));
+      padding:14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+      transition: transform .18s ease, box-shadow .18s ease;
+      cursor: default;
+    }
+    .project:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(2,6,23,0.6);
+    }
+    .project .title { font-weight:700; font-size:14px; margin-bottom:6px; }
+    .project .desc { font-size:12px; opacity:0.8; margin-bottom:8px; min-height:34px; }
+    .project .tag { font-size:11px; display:inline-block; padding:6px 8px; border-radius:999px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); }
+
+    .about {
+      margin-top:20px;
+      font-size:13px;
+      background: rgba(255,255,255,0.02);
+      padding:12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+
+    .cta {
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .btn {
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:600;
+      font-size:13px;
+      border:none;
+      cursor:pointer;
+      background: linear-gradient(90deg,#06b6d4,#34d399);
+      color:#042a2b;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      box-shadow: 0 8px 20px rgba(6,182,212,0.12);
+    }
+    .ghost {
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:600;
+      font-size:13px;
+      border:1px solid rgba(255,255,255,0.06);
+      background:transparent;
+      color: #e6eef8;
+      text-decoration:none;
+    }
+
+    /* responsive */
+    @media (max-width:880px){
+      .card { grid-template-columns: 1fr; }
+      .profile { flex-direction:row; gap:16px; padding:18px; align-items:center; }
+      .avatar { width:84px; height:84px; font-size:28px; }
+      .content { padding:18px; }
+      .skills { display:none; } /* hide to keep compact */
+    }
+
+    .dekorasi-kiri {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 300px; /* ukuran gambar */
+    opacity: 0.8; /* sedikit transparan biar nggak ganggu teks */
+}
+  </style>
+</head>
+<body>
+
+  <main class="card" role="main">
+    <!-- Sidebar -->
+    <aside class="profile" aria-label="profil">
+      <div class="avatar">
+  <img src="hazen.jpg" alt="Foto Saya" style="width:100%; height:100%; border-radius:12px; object-fit:cover;">
+      </div>
+      <div style="flex:1">
+        <h1 class="name">HAZEN ZENITH DESIGN</h1>
+        <p class="role">Since 2022 • Design Enthusiast</p>
+
+        <div class="socials" aria-hidden>
+          <span class="chip">Logo</span>
+          <span class="chip">Poster</span>
+          <span class="chip">Vidio</span>
+        </div>
+
+        <div class="skills" aria-label="skill">
+          <div class="skill">
+            <div class="label"><span>Logo</span><span>90%</span></div>
+            <div class="bar"><i style="width:90%"></i></div>
+          </div>
+          <div class="skill">
+            <div class="label"><span>Poster</span><span>99%</span></div>
+            <div class="bar"><i style="width:99%"></i></div>
+          </div>
+          <div class="skill">
+            <div class="label"><span>Vidio</span><span>50%</span></div>
+            <div class="bar"><i style="width:50%"></i></div>
+          </div>
+        </div>
+          <img src="roblox.png" alt="Dekorasi" class="dekorasi-kiri">
+      </div>
+    </aside>
+
+    
+    <section class="content">
+      <div class="headline">
+        <div>
+          <h2>Halo! Aku Hazenn </h2>
+          <p>Website ini berisi profil singkat, daftar keterampilan, dan dokumentasi beberapa proyek yang pernah saya kerjakan.
+             Dirancang dengan tampilan modern dan responsif, halaman ini bertujuan memberikan gambaran menyeluruh 
+            tentang kemampuan saya di bidang design, desain poster, dan manajemen konten digital.</p>
+        </div>
+        <div style="text-align:left">
+          <p style="font-size:12px;opacity:0.8">Terakhir diperbarui: 09 Aug 2025</p>
+        </div>
+      </div>
+
+      <div class="projects" aria-label="projek">
+    <a href="https://instagram.com/hazendsgn" target="_blank" style="text-decoration:none; color:inherit;">
+        <article class="project">
+          <div class="title">instagram</div>
+          <div class="desc">Kreativitas tanpa batas, dari ide menjadi karya nyata. Setiap desain, video, dan logo adalah cerita yang saya tuangkan untuk menghadirkan kesan tak terlupakan.</div>
+          <div class="tag">Portofolio • instagram</div>
+        </article>
+        </a>
+
+    <a href="https://wa.me/6285137474887" target="_blank"
+    style="text-decoration:none; color:inherit;">
+        <article class="project">
+          <div class="title">WhatsApp</div>
+          <div class="desc">Desain poster profesional — cepat, rapi, dan sesuai permintaan ✨</div>
+          <div class="tag">WhatsApp • Catalog</div>
+        </article>
+        </a>
+
+<a href="https://whatsapp.com/channel/0029Vb03BUaEKyZDqjgXgz47" target="_blank"   style="text-decoration:none; color:inherit;">
+        <article class="project">
+          <div class="title">Testimony</div>
+          <div class="desc">Setiap klien punya cerita unik, dan kami mengubahnya menjadi karya visual yang berkesan — mulai dari video, logo, hingga poster.
+             Inilah pengalaman mereka bersama layanan kami.</div>
+          <div class="tag">WhatsApp • channel</div>
+        </article>
+    </a>
+
+    <a href="https://whatsapp.com/channel/0029VbAVeA12phHQH6jLqu2C" target="_blank"   style="text-decoration:none; color:inherit;">
+        <article class="project">
+          <div class="title">Portofolio</div>
+          <div class="desc">Portofolio ini berisi kumpulan karya video kreatif, desain logo yang mencerminkan identitas brand, serta poster yang dirancang untuk menarik perhatian. Setiap 
+            proyek kami kerjakan dengan fokus pada kualitas visual, detail yang rapi, dan hasil yang memuaskan klien.</div>
+          <div class="tag">WhatsApp • channel</div>
+        </article>
+      </div>
+       </a> 
+
+      <div class="about">
+        <strong>Tentang singkat</strong>
+        <p style="margin-top:8px; font-size:13px"> Kami adalah penyedia layanan kreatif yang berfokus pada pembuatan video, desain logo, dan poster profesional. 
+    Mengutamakan kualitas visual dan ketepatan waktu, kami membantu bisnis, event, dan personal branding untuk tampil menonjol melalui karya desain yang menarik, modern, dan sesuai kebutuhan klien.
+  </p>
+      </div>
+
+    
+
+    </section>
+  </main>
+
+</body>
+</html>
